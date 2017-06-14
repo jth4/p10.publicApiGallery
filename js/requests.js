@@ -1,50 +1,49 @@
-//var xhr = new XMLHttpRequest();
-//xhr.onreadystatechange = function () {
-//  if(xhr.readyState === 4) {
-//    var employees = JSON.parse(xhr.responseText);
-//    var statusHTML = '<ul class="bulleted">';
-//    for (var i=0; i<employees.length; i += 1) {
-//      if (employees[i].inoffice === true) {
-//        statusHTML += '<li class="in">';
-//      } else {
-//        statusHTML += '<li class="out">';
-//      }
-//      statusHTML += employees[i].name;
-//      statusHTML += '</li>';
-//    }
-//    statusHTML += '</ul>';
-//    document.getElementById('employeeList').innerHTML = statusHTML;
-//  }
-//};
-//xhr.open('GET', '../data/employees.json');
-//xhr.send();
-
-// 
-
 var pokeXhr = new XMLHttpRequest();
+pokeXhr.open('GET', 'http://pokeapi.co/api/v2/pokemon/');
+
 pokeXhr.onreadystatechange = function () {
 	if(pokeXhr.readyState === 4) {
 		
 		var pokemon = JSON.parse(pokeXhr.responseText);
-		console.log(pokemon.results[1].name);
-
-		var pokeHTML = '<ul>';
+		var pokeHTML = '<div id="gallery">';
+		var pokeStats = {};
 		
 			for (var i=0; i < pokemon.results.length; i+= 1) {
-				pokeHTML += '<li>';
-				pokeHTML += pokemon.results[i].name;
-				pokeHTML += '</li>';
-			}
+				
+				var picNum = i + 1;	
+				var pokeWeight = 0;
+				console.log(pokeWeight);
+				var pokeHeight = 0;
+				var pokedex = [];
 			
-		pokeHTML += '</ul>';
+					//individual poke stats
+					fetch(pokemon.results[i].url)
+					.then(res => res.json())
+					.then(function(pokeStats) {
+						pokeWeight = pokeStats.weight;
+						console.log(pokeStats.name);
+						console.log(pokeWeight);
+						pokeHeight = pokeStats.height; 
+						console.log(pokeHeight);
+						pokedex.push(pokeStats.name, pokeWeight, pokeHeight);
+							
+					})
+					.catch(err => console.error(err));
+					
+				pokeHTML += '<a href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + picNum + '.png" data-lightbox="gallery" ';	
+				pokeHTML += ' data-title= Weight: ' + pokeWeight + '<br>' +
+								'Height: ' + pokeHeight;
+				pokeHTML += '<div class="pokePic"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + picNum + '.png"></div>';
+				pokeHTML += pokemon.results[i].name;
+				pokeHTML += ' </a>';
+			}
 		
-		console.log(pokeHTML);
+		pokeHTML += '</div>';
 		
 		document.getElementById('pokeWrap').innerHTML = pokeHTML;
 	}
 };
 
-pokeXhr.open('GET', 'http://pokeapi.co/api/v2/pokemon/');
 pokeXhr.send();
 
 
