@@ -1,66 +1,19 @@
-.pokePic {
-	border: 1px solid #333;
+body {
+	background-color: #000;
 }
 
-a {
-	text-decoration: none;
-	color: green;
-	text-transform: capitalize;
-	text-align: center;
+h1 {
+	color: white;
+	background: orange;
+	padding-left: 35px;
+	letter-spacing: -2.5px;
 }
-
 
 /*/////////////////////////////LAYOUT*/
 
 .container{
 	width: 100%;
 	margin: 0 auto;
-}
-
-#main-header {
-	margin: 20px auto;
-	max-width: 350px;
-}
-
-/*///////////////////////////SEARCHBAR*/
-
-input {
-	font-family: 'Ubuntu', sanserif;
-	width: 100%;
-	padding: 5px;
-	box-sizing: border-box;
-	box-shadow: 0 0 0 2px #eee;
-	border: 0;
-	border-radius: 5px;
-	transition: box-shadow .5s ease;
-}
-
-input:focus {
-	box-shadow: 0 0 0 2px #ddd;
-}
-
-input::-webkit-input-placeholder {
-	transition: color .2s ease;
-}
-
-input::-moz-input-placeholder {
-	transition: color .2s ease;
-}
-
-input::-ms-input-placeholder {
-	transition: color .2s ease;
-}
-
-input:focus::-webkit-input-placeholder {
-	color: white;
-}
-
-input:focus::-moz-input-placeholder {
-	color: white;
-}
-
-input:focus::-ms-input-placeholder {
-	color: white;
 }
 
 /*/////////////////////////GALLERY*/
@@ -70,39 +23,46 @@ input:focus::-ms-input-placeholder {
 	margin:0 auto;
 	display: inline-flex;
 	flex-wrap: wrap;
-	justify-content: center;
-	
+	justify-content: center;	
+}
+
+#gallery img {
+	border: 2px solid #373737;
+	border-radius: 0px;
+	padding: 50px;
+	background-color: #000;
+	transition: background-color .38s ease;
 }
 
 #gallery a{
-	padding: 0;
 	max-width: initial;
 	height: 200px;
 }
 
-/*/////////////////////////LIGHTBOX*/
+/*/////////////////////////HOVER */
+
+#gallery img:hover {
+	background-color: orange;
+	-webkit-animation: fader 15s infinite;
+	animation: fader 15s infinite;
+}
+
+@keyframes  fader {
+    15% { background-color: orange;} 
+    45% { background-color:	yellow;} 
+    90% { background-color: lime;}
+	} 
+}
 
 
 /*////////////////////////MEDIA Q's*/
 
 @media screen and (min-width:768px) {
-	#main-header {
-		margin: 20px auto;
-		width: 50%;
-	}
 
 	#gallery {
-		max-width: 1000px;
+		max-width: 100%;
 		width: 100%;
-		margin: 0 auto;
 		display: flex;
-	}
-	
-	#gallery a {
-		padding: 20px;
-		display: inline;
-		width: initial;
-		height: initial;
 	}
 	
 }
